@@ -1,0 +1,39 @@
+class Solution
+{
+   
+    String reverseEqn(String S)
+    {
+        // your code here
+       StringBuilder res=new StringBuilder();
+       
+       char ch[]=S.toCharArray();
+       Stack<Character> st=new Stack<>();
+       int n=S.length();
+       int i=n-1;
+       
+       while(i>=0)
+       {
+           if(ch[i]=='+'||ch[i]=='-'||ch[i]=='/'||ch[i]=='*')
+           {
+               
+               while(!st.isEmpty())
+               {
+                   res.append(st.pop());
+               }
+               res.append(ch[i]);
+               
+           }
+           else
+           {
+               st.push(ch[i]);
+           }
+           i--;
+       }
+       
+       while(!st.isEmpty())
+       {
+           res.append(st.pop());
+       }
+       return res.toString();
+    }
+}
