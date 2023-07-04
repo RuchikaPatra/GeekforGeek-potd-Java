@@ -1,0 +1,27 @@
+class Solution {
+    
+    public void Rearrange(int a[], int n)
+    {
+        // Your code goes herea
+        ArrayList<Integer>arr=new ArrayList();
+        ArrayList<Integer>arr1=new ArrayList();
+        
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]<0)
+            {
+                arr.add(a[i]);
+            }
+            else
+            {
+                arr1.add(a[i]);
+            }
+        }
+        arr.addAll(arr1);
+        for(int i=0;i<n;i++)
+        {
+            a[i]=arr.get(i);
+        }
+        
+    }
+}
