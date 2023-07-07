@@ -1,0 +1,48 @@
+class Solution
+{
+    //Function to merge the arrays.
+    public static void merge(long arr1[], long arr2[], int n, int m) 
+    {
+        // code here 
+          int i = 0; // pointer for arr1
+        int j = 0; // pointer for arr2
+        int k = 0; // pointer for merged array
+
+        long[] merged = new long[n + m]; // create a new array to store the merged result
+
+        // Traverse both arrays and compare the elements
+        while (i < n && j < m) {
+            if (arr1[i] <= arr2[j]) {
+                merged[k] = arr1[i];
+                i++;
+            } else {
+                merged[k] = arr2[j];
+                j++;
+            }
+            k++;
+        }
+
+        // Copy the remaining elements of arr1, if any
+        while (i < n) {
+            merged[k] = arr1[i];
+            i++;
+            k++;
+        }
+
+        // Copy the remaining elements of arr2, if any
+        while (j < m) {
+            merged[k] = arr2[j];
+            j++;
+            k++;
+        }
+
+        // Copy the merged array back to arr1 and arr2
+        for (int x = 0; x < n; x++) {
+            arr1[x] = merged[x];
+        }
+
+        for (int y = 0; y < m; y++) {
+            arr2[y] = merged[n + y];
+        }
+    }
+}
