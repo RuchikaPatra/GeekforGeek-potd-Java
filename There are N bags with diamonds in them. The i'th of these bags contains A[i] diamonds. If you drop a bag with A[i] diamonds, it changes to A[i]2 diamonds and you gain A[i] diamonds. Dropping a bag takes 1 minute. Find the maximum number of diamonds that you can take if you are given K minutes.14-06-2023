@@ -1,0 +1,16 @@
+class Solution {
+    static long maxDiamonds(int[] A, int N, int K) {
+        // code here
+         PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int x: A)
+            pq.add(x);
+        long prof=0;
+        for(int i=0;!pq.isEmpty() && i<K;i++)
+        {
+            int num=pq.poll();
+            pq.add(num/2);
+            prof+=num;
+        }
+        return prof;
+    }
+};
