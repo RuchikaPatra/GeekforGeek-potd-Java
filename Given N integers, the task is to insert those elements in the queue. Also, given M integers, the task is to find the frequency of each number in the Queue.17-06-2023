@@ -1,0 +1,35 @@
+class Geeks{
+    
+    // Function to insert element into the queue
+    static void insert(Queue<Integer> q, int k){
+        
+        // Your code here
+         q.add(k);
+    }
+    
+    // Function to find frequency of an element
+    // rteturn the frequency of k
+    static int findFrequency(Queue<Integer> q, int k){
+        
+        // Your code here
+         int count = 0;
+        if (!q.contains(k)) {
+            return -1;
+        } else {
+//            Iterator<Integer> it = q.iterator();
+//            while (it.hasNext()) {
+//                if (q.peek() == k) {
+//                    count++;
+//                }
+            for (Integer e : q) {
+
+                if (e == k) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+    
+}
