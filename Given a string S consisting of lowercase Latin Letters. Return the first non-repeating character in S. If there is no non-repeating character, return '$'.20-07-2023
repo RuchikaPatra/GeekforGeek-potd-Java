@@ -1,0 +1,14 @@
+class Solution
+{
+    //Function to find the first non-repeating character in a string.
+    static char nonrepeatingCharacter(String S)
+    {
+        //Your code here
+        for(int i=0;i<S.length();i++)
+        {
+            if(S.lastIndexOf(S.charAt(i))==i  && S.indexOf(S.charAt(i))==i)
+            return S.charAt(i);
+        }
+        return '$';
+    }
+}
