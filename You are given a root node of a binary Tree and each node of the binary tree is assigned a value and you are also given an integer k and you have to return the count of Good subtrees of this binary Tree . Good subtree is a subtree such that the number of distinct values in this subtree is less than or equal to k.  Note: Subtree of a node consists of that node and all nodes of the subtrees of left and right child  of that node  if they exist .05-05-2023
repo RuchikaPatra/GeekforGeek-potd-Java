@@ -1,0 +1,34 @@
+class Solution
+{
+    public static int goodSubtrees(Node root,int k)
+    {
+        int[] count={0};
+         HashSet<Integer> ans=goodSubtreesR(root,k,count);
+        return count[0];
+    }
+    
+    public static HashSet<Integer> goodSubtreesR(Node root, int k, int[] count){
+        if(root==null) return new HashSet<Integer>();
+        
+        HashSet<Integer> ans= new HashSet<>();
+        HashSet<Integer> left;
+        HashSet<Integer> right;
+        
+        if(root!=null){
+            left= goodSubtreesR(root.left,k,count);
+            if(left.size()>0) left.forEach((val)-> ans.add(val));
+        }
+        if(root!=null){
+            right= goodSubtreesR(root.right,k,count);
+            if(right.size()>0) right.forEach((val)-> ans.add(val)); 
+        }
+       
+        ans.add(root.data);
+        
+        if(ans.size()<=k) count[0]++; 
+        
+        
+        return ans;
+        
+    }
+}
