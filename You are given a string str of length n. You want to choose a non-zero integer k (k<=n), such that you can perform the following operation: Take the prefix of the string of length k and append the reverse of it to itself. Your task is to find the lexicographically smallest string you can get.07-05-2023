@@ -1,0 +1,29 @@
+class Solution {
+    public static String stringMirror(String str) {
+        // code here
+        String m=""+str.charAt(0);
+        
+        for(int i=0;i<str.length()-1;i++)
+        {
+         
+         if(str.charAt(0)==str.charAt(i+1))
+         {
+             break;
+         }
+         
+           if(str.charAt(i)>=str.charAt(i+1)) 
+           {
+              m=m+str.charAt(i+1);
+           }
+           else
+           {
+               break;
+           }
+        }
+        
+       StringBuilder sb = new StringBuilder();
+       sb.append(m);
+       
+        return m+sb.reverse().toString();
+    }
+}
