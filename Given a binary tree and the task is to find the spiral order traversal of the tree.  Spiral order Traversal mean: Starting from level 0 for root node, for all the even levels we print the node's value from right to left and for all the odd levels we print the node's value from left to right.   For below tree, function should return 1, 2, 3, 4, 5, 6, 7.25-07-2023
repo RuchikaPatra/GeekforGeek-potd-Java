@@ -1,0 +1,62 @@
+class Spiral
+{
+    //Function to return a list containing the level order 
+    //traversal in spiral form.	
+    ArrayList<Integer> findSpiral(Node root) 
+    {
+        // Your code here
+        ArrayList<Integer> solution = new ArrayList<Integer>();
+        if(root == null){
+            return solution;
+        }
+        
+        Queue<Node> queue = new LinkedList<Node>();
+        Queue<Node> rightQueue = new LinkedList<Node>();
+        Queue<Node> leftQueue = new LinkedList<Node>();
+        queue.add(root);
+        int level = 0;
+        while(queue.size()>0){
+            int count = queue.size();
+            while(count-- > 0){
+                Node temp = queue.remove();
+                solution.add(temp.data);
+                Queue<Node> temp1 = new LinkedList<Node>();
+                Queue<Node> temp2 = new LinkedList<Node>();
+                if(level%2 != 0){
+                    temp2.addAll(rightQueue);
+                    rightQueue.clear();
+                    if(temp.right != null){
+                        temp1.add(temp.right);
+                    }
+                    if(temp.left != null){
+                        temp1.add(temp.left);
+                    }
+                    rightQueue.addAll(temp1);
+                    rightQueue.addAll(temp2);
+                }else{
+                    temp2.addAll(leftQueue);
+                    leftQueue.clear();
+                    if(temp.left != null){
+                        temp1.add(temp.left);
+                    }
+                    if(temp.right != null){
+                        temp1.add(temp.right);
+                    }
+                    leftQueue.addAll(temp1);
+                    leftQueue.addAll(temp2);
+                }
+            }
+            if(level++%2 == 0){
+                queue.addAll(rightQueue);
+                queue.addAll(leftQueue);
+            }else{
+                queue.addAll(leftQueue);
+                queue.addAll(rightQueue);
+            }
+            rightQueue.clear();
+            leftQueue.clear();
+            
+        }
+        return solution;
+    }
+}
