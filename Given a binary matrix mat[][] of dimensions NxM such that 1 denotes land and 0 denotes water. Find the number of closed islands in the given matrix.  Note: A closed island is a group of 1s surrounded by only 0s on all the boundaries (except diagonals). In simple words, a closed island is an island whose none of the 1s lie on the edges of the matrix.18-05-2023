@@ -1,0 +1,68 @@
+class Solution
+{
+    public int closedIslands(int[][] matrix, int N, int M)
+    {
+        // Code here
+        int cnt = 0;
+        boolean vis[][] = new boolean[N][M];
+        Queue<Pair> q = new LinkedList<>();
+
+        for(int i= 0; i<M; i++){
+            if(!vis[0][i] && matrix[0][i] == 1){
+                bfs(0, i, q, matrix, vis, N, M);
+            }
+            if(!vis[N-1][i] && matrix[N-1][i] == 1){
+                bfs(N-1, i, q, matrix, vis, N, M);
+            }
+        }
+
+        for(int i= 0; i<N; i++){
+            if( !vis[i][0] && matrix[i][0] == 1){
+                bfs(i, 0, q, matrix, vis, N, M);
+            }
+            if(!vis[i][M-1] && matrix[i][M-1] == 1){
+                bfs(i, M-1, q, matrix, vis, N, M);
+            }
+        }
+        
+        for(int i=0; i<N; i++){
+            for(int j = 0; j<M; j++){
+
+                if(!vis[i][j] && matrix[i][j] == 1){
+                    bfs(i, j, q, matrix, vis, N, M);
+                    cnt++;
+                }
+                
+            }
+        }
+        return cnt;
+        
+    }
+    void bfs(int r, int c, Queue<Pair> q, int matrix[][], boolean vis[][], int n, int m){
+        q.add(new Pair(r, c));
+        while(!q.isEmpty()){
+            Pair curNode = q.remove();
+            vis[curNode.row][curNode.col] = true;
+            matrix[curNode.row][curNode.col] = 0;
+            int[] delR = {-1, 0, 1, 0};
+            int[] delC = {0, 1, 0, -1};
+            for(int i= 0; i<=3; i++){
+                int nRow = curNode.row + delR[i];
+                int nCol = curNode.col + delC[i];
+                if(nRow >= 0 && nRow < n && nCol >= 0 && nCol < m
+                    && matrix[nRow][nCol] == 1 && !vis[nRow][nCol]){
+                        matrix[nRow][nCol] = 0;
+                        q.add(new Pair(nRow, nCol));
+                        vis[nRow][nCol] = true;
+                }
+            }
+        }
+    }
+    class Pair{
+        int row, col;
+        Pair(int row, int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+}
