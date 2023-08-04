@@ -1,0 +1,74 @@
+class Solution {
+    public static ArrayList<Integer> kthSmallestNum(int n, int[][] range, int q, int[] queries) {
+        // code here
+               // Arrays.sort(range,(a,b)->a[0]-b[0]);
+        // code here
+        Arrays.sort(range,new Comparator<int[]>(){
+            public int compare(int[] a,int[] b)
+            {
+                return a[0]-b[0];
+            }
+        });
+        // for(int i=0;i<range.length;i++)
+        //     System.out.println(Arrays.toString(range[i]));
+        //     return new ArrayList();
+        
+        ArrayList<int[]> list=new ArrayList<int[]>();
+        int start=range[0][0];
+        int end=range[0][1];
+        for(int i=1;i<range.length;i++)
+        {
+            if(end>=range[i][0])
+            {
+                end=Math.max(end,range[i][1]);
+            }
+            else {
+                list.add(new int[]{start,end});
+                start=range[i][0];
+                end=range[i][1];
+            }
+        }
+        list.add(new int[]{start,end});
+        // for(int i=0;i<list.size();i++)
+        // System.out.println(list.get(i)[0]+" "+list.get(i)[1]);
+         ArrayList<Integer> res=new ArrayList<>();
+      int size=0;
+        for(int i=0;i<queries.length;i++)
+        {
+            int k=queries[i];
+//            boolean flag=false;
+            for(int j=0;j<list.size();j++)
+            {
+                int s=list.get(j)[0];
+                int e=list.get(j)[1];
+                int curr=e-s+1;
+                if(curr>=k)
+                {
+                   // flag=true;
+                    res.add(s+k-1);
+                    k=k-curr;
+                    break;
+                }
+                k=k-curr;
+                // size+=e-s+1;
+            }
+            if(k>0)
+            res.add(-1);
+        }
+    //   for(int i=0;i<list.size();i++)
+    //     {
+    //         for(int j=list.get(i)[0];j<=list.get(i)[1];j++)
+    //             res.add(j);
+    //     }
+        
+    //     ArrayList<Integer> ans=new ArrayList<>();
+    //     for(int i=0;i<queries.length;i++)
+    //     {
+    //         if(res.size()<=queries[i]-1)
+    //             ans.add(-1);
+    //         else 
+    //         ans.add(res.get(queries[i]-1));
+    //     }
+        return res;
+    }
+}
