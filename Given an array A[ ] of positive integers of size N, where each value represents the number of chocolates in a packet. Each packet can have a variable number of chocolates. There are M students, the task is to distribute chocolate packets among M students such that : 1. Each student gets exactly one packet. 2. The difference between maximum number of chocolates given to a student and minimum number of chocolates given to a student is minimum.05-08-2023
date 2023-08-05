@@ -1,0 +1,28 @@
+class Solution
+{
+    public long findMinDiff (ArrayList<Integer> a, int n, int m)
+    {
+        // your code here
+         if (m > a.size()) {
+            return 0;
+        }
+        Collections.sort(a);
+        long ans = Integer.MAX_VALUE;
+
+
+        int j = m-1;
+        int i = 0;
+
+
+        while (j < a.size()) {
+            long diff = a.get(j) - a.get(i);
+            if (diff < ans) {
+                ans = diff;
+            }
+            j++;
+            i++;
+        }
+        
+        return ans;
+    }
+}
