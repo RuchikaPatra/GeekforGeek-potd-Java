@@ -1,0 +1,28 @@
+class Solution
+{
+    static Node tmp;
+    static boolean modify(Node tail){
+        if(tail == null) return true;
+        
+        
+        if(!modify(tail.next)) return false;
+        
+        if(tail.next == tmp || tail == tmp) return false;
+        
+        int data = tmp.data;
+        tmp.data = tail.data - data;
+        tail.data = data;
+        
+        tmp = tmp.next;
+        
+        return true;
+        
+    }
+    public static Node modifyTheList(Node head)
+    {
+        tmp = head;
+        modify(head.next);
+        
+        return head;
+    }
+}
