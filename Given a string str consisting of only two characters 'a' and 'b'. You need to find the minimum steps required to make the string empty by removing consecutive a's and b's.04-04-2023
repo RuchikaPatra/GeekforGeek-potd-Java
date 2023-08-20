@@ -1,0 +1,30 @@
+class Solution{
+	int minSteps(String str) {
+		//Write your code here
+		return 1 + Math.min(concentrate(str, 'a'), concentrate(str, 'b'));
+	}
+	
+	private int concentrate(String str, char ab) {
+	    int n = str.length();
+	    int i = 0;
+	    
+	    int steps = 0;
+	    
+	    while (i < n) {
+	        boolean flag = false;
+	        
+	        while (i < n && str.charAt(i) != ab) {
+	            flag = true;
+	            i++;
+	        }
+	        
+	        if (flag) {
+	            steps++;
+	        } else {
+	            i++;
+	        }
+	    }
+	    
+	    return steps;
+	}
+}
