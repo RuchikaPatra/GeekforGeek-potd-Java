@@ -1,0 +1,12 @@
+class Solution {
+    int isPalindrome(String S) {
+        // code here
+        S = S.toLowerCase();
+        
+        // Remove all non-alphanumeric characters from the string
+        S = S.replaceAll("[^a-z A-Z 0-9]", "");
+        
+        // Compare the original string with its reversed version
+        return S.equals(new StringBuilder(S).reverse().toString()) ? 1 : 0;
+    }
+};
