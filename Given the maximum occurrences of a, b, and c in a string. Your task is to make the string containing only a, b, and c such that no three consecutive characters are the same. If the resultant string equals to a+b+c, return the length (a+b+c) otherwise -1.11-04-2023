@@ -1,0 +1,52 @@
+class Solution {
+    int solve(int a, int b, int c) {
+        // code here
+         int lar,slar,tlar;
+        if(a>=b && a>=c)
+        {
+            lar=a;
+            if(b>=c)
+            {
+                slar=b;
+                tlar=c;
+            }
+            else
+            {
+                slar=c;
+                tlar=b;
+            }
+        }
+        else if(b>=a && b>=c)
+        {
+            lar=b;
+            if(a>=c)
+            {
+                slar=a;
+                tlar=c;
+            }
+            else
+            {
+                slar=c;
+                tlar=a;
+            }
+        }
+        else
+        {
+            lar=c;
+            if(a>=b)
+            {
+                slar=a;
+                tlar=b;
+            }
+            else
+            {
+                slar=b;
+                tlar=a;
+            }
+        }
+        if(lar<=2*(slar+tlar+1))
+        return a+b+c;
+        else
+        return -1;
+    }
+};
