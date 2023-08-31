@@ -1,0 +1,40 @@
+class Solution
+{
+    public static long totalTime(int n,int arr[],int time[])
+    {
+        HashMap<Integer,Integer>map = new HashMap();
+        map.put(arr[0],1);
+        long sum = 0;
+        for(int i=1;i<n;i++){
+            if(map.containsKey(arr[i])){  
+                //Checks if the current element of arr exists as a key in the map 
+                // If the element exists in the map:
+                
+                // Checks if the corresponding value in the map is 1
+                if(map.get(arr[i])==1){
+                    
+                    //  If the value is 1, retrieves the corresponding value from the time array using the element minus one as the index
+                    int t = time[arr[i]-1];
+                    
+                    // Updates the value in the map with the retrieved time value 
+                    map.put(arr[i],t);
+                    
+                    // Adds the retrieved time value to the sum
+                    sum+=t;
+                }
+                else{
+                    sum+=map.get(arr[i]);
+                }
+            }
+            
+            // If the element doesn't exist in the map:
+// a. Adds the element as a key in the map with a value of 1 (map.put(arr[i], 1)).
+// b. Adds 1 to the sum (sum += 1).
+            else{
+                map.put(arr[i],1);
+                sum+=1;
+            }
+        }
+        return sum;
+    }
+}
