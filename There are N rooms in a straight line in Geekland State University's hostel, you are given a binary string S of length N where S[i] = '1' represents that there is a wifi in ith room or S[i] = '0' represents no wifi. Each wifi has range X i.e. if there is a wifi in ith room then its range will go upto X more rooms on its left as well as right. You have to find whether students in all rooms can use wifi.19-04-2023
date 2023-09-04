@@ -1,0 +1,50 @@
+class Solution 
+{ 
+    boolean wifiRange(int N, String S, int X) 
+    { 
+        int steps = 0;
+        boolean visited[] = new boolean[N];
+        //left -> right
+        for(int i = 0;i < N;i++)
+        {
+            char ch = S.charAt(i);
+            if(ch == '1')
+            {
+                steps = X;
+                visited[i] = true;
+            }
+            else
+            {
+                if(steps > 0)
+                {
+                    visited[i] = true;
+                    steps--;
+                }
+            }
+           
+        }
+        for(int i = N-1;i>=0;i--)
+        {
+            char ch = S.charAt(i);
+            if(ch == '1')
+            {
+                steps = X;
+                visited[i] = true;
+            }
+            else
+            {
+                if(steps > 0)
+                {
+                    visited[i] = true;
+                    steps--;
+                }
+            }
+        }
+        for(int i = 0;i < N;i++)
+        {
+            if(!visited[i]) return false;
+        }
+       // System.out.println((Arrays.toString(visited)));
+        return true;
+    }
+} 
