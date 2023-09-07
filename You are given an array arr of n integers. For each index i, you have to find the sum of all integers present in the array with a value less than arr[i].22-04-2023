@@ -1,0 +1,21 @@
+class Solution
+{
+    public long[] smallerSum(int n,int arr[])
+    {
+        long[] newarray=new long[n];
+        for(int i=0;i<arr.length;i++)
+        {
+             int sum=0;
+            for(int j=0;j<arr.length;j++)
+            {
+                if(arr[j]<arr[i] )
+                {
+                    sum=sum+arr[j];
+                }
+                newarray[i]=sum;
+                 
+            }
+        }
+        return newarray;
+    }
+}
