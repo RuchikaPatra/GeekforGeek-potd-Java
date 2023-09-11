@@ -1,0 +1,28 @@
+class Solution {
+    public static boolean is_possible_to_get_seats(int n, int m, int[] seats) {
+        // code here
+        if(m==1){
+            if(seats[0]==1&&n==1)return false;
+            if(seats[0]==1 && n==0)return true;
+            if(seats[0]==0)return true;
+        }
+        int c=0;
+        if(m>=2 && seats[0]==0 && seats[1]==0){
+            c++;
+            seats[0]=1;
+        }
+        
+        if(m>=2 && seats[m-1]==0 && seats[m-2]==0){
+            c++;
+            seats[m-1]=1;
+        }
+        
+        for(int i=1;i<m-2;i++){
+            if(seats[i-1]==0 && seats[i+1]==0 && seats[i]==0){
+                c++;seats[i]=1;
+            }
+        }
+        if(c>=n)return true;
+        else return false;
+    }
+}
