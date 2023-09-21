@@ -1,0 +1,25 @@
+class Solution {
+    public static void solve(Node root,HashMap<Integer,Integer> map,int l){
+        if(root == null){
+            return;
+        }
+        if(map.containsKey(l)){
+            map.put(l,map.get(l)+root.data);
+        }
+        else{
+            map.put(l,root.data);
+        }
+        solve(root.left,map,l+1);
+        solve(root.right,map,l+1);
+    }
+    public int maxLevelSum(Node root) {
+        // add code here.
+        HashMap<Integer,Integer> map = new HashMap<>();
+        solve(root,map,0);
+        int max = Integer.MIN_VALUE;
+        for(Map.Entry<Integer,Integer> i : map.entrySet()){
+            max = Math.max(i.getValue(),max);
+        }
+        return max;
+    }
+}
