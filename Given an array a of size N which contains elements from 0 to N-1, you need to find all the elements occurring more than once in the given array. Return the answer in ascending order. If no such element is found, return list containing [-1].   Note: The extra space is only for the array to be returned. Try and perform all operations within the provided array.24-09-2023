@@ -1,0 +1,21 @@
+class Solution {
+  public static ArrayList<Integer> duplicates(int arr[], int n) {
+            Arrays.sort(arr);
+             LinkedHashMap<Integer,Integer> map=new LinkedHashMap<>();
+        for (int i = 0; i <n ; i++) {
+            map.put(arr[i],map.getOrDefault(arr[i],0)+1);
+        }
+        ArrayList<Integer> arrayList=new ArrayList<>();
+        for (int i:
+             map.keySet()) {
+            if(map.get(i)>1){
+                arrayList.add(i);
+            }
+        }
+        if(arrayList.size()==0 ){
+            arrayList.add(-1);
+          
+        }
+        return arrayList;
+    }
+}
