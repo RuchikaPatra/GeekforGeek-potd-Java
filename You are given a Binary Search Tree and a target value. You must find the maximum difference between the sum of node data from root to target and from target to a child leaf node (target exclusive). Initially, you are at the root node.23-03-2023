@@ -1,0 +1,31 @@
+class Solution
+{
+    public static int maxDifferenceBST(Node root,int target)
+    {
+        //Please code here
+         int sum=0,a=0,i=1,sum2=0;
+        Node temp=root;
+        while(i>0){
+            if(target<temp.data){
+                sum+=temp.data;
+                if(temp.left==null)break;
+                temp=temp.left;
+                
+            }
+            else if(target>temp.data){
+                sum+=temp.data;
+                if(temp.right==null)break;
+                temp=temp.right;
+            }
+            else if(temp.data==target)a=1;
+            else break;
+        if(a==1) return(sum-(fiind(temp,sum2)-target)) ;  }
+        return(-1);}
+        
+    public   static int fiind(Node root,int sum){
+        if(root==null)return(Integer.MAX_VALUE);
+        else sum+=root.data;
+        if(root.left==null && root.right==null)return sum;
+        else return(Math.min(fiind(root.left,sum),fiind(root.right,sum)));
+    }
+}
