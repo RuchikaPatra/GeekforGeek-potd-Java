@@ -1,0 +1,61 @@
+class Solution{
+    static int[] ans= new int[2];
+    static int [] endPoints(int [][]matrix, int R, int C){
+        
+        return endp(matrix,R,C,"right",0,0);
+        
+        //code here
+    }
+    public static int[] endp(int [][] mat,int R, int C,String dir,int i, int j){
+        
+        if(i==R || i<0 || j==C || j<0){
+            if(dir=="up"){
+                ans[0]=i+1;
+                ans[1]=j;
+            }
+            if(dir=="right"){
+                ans[0]=i;
+                ans[1]=j-1;
+            }
+            if(dir=="down"){
+                ans[0]=i-1;
+                ans[1]=j;
+            }
+            if(dir=="left"){
+                ans[0]=i;
+                ans[1]=j+1;
+            }
+        }
+            
+        else if(mat[i][j]==1){
+            mat[i][j]=0;
+            if(dir=="up"){
+                return endp(mat,R,C,"right",i,j+1);
+            }
+            else if(dir=="down"){
+                return endp(mat,R,C,"left",i,j-1);
+            }
+            else if(dir=="right"){
+                return endp(mat,R,C,"down",i+1,j);
+            }
+            else{
+                return endp(mat,R,C,"up",i-1,j);
+            }
+        }
+        else{
+            if(dir=="up"){
+                return endp(mat,R,C,"up",i-1,j);
+            }
+            else if(dir=="down"){
+                return endp(mat,R,C,"down",i+1,j);
+            }
+            else if(dir=="right"){
+                return endp(mat,R,C,"right",i,j+1);
+            }
+            else{
+                return endp(mat,R,C,"left",i,j-1);
+            }
+        }
+        return ans;
+    }
+}
