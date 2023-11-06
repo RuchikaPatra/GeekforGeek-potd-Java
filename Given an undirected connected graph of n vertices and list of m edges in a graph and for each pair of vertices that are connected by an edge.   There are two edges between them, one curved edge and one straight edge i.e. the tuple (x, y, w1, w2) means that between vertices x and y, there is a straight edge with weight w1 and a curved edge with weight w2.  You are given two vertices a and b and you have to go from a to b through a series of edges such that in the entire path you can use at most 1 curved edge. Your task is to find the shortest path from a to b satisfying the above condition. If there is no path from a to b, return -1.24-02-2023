@@ -1,0 +1,96 @@
+class Solution {
+    /*static int shortestPath(int n, int m, int a, int b, ArrayList<ArrayList<Integer>> edges) {
+        // code here
+    }*/
+    static class edge{
+        int src;
+        int dest;
+        int w1 ;
+     
+        edge(int s , int d  , int w1 ){
+            this.src = s ;
+            this.dest = d;
+            this.w1 = w1 ;
+        }
+    }
+    static class info implements Comparable<info>{
+        int x ;
+        int p ;
+        info(int x , int p){
+            this.x = x ;
+            this.p = p ;
+        }
+        @Override 
+        public int compareTo(info p2){
+            return this.p - p2.p ;
+        }
+    }
+    static void dsk(ArrayList<edge> g[] , int src , boolean v[] , int dist[] ){
+     PriorityQueue<info> pq = new PriorityQueue<>();
+        pq.add(new info(src, 0));
+        while(!pq.isEmpty()){
+            info curr = pq.remove() ;
+            if(!v[curr.x]){
+                v[curr.x] = true ;
+                for(int i=0 ; i<g[curr.x].size() ; i++){
+                    edge e = g[curr.x].get(i);
+                       if(dist[e.dest] > dist[e.src]+e.w1){
+                          dist[e.dest]= dist[e.src]+e.w1 ;
+                          pq.add(new info(e.dest , dist[e.dest] ));
+                   
+                    }
+                   
+                   
+                    }
+                   
+                }
+
+           // }
+        }
+        
+    }
+     static int shortestPath(int n, int m, int a, int b, ArrayList<ArrayList<Integer>> edges) {
+        // code here
+        ArrayList<edge> g[] = new ArrayList[n];
+        ArrayList<edge>g1[] = new ArrayList[n];
+        for(int i=0 ; i<n ; i++){
+            g[i] = new ArrayList<>();
+            g1[i] = new ArrayList<>();
+        }
+        for(int i= 0 ; i<m ; i++){
+            ArrayList<Integer> al  = edges.get(i);
+            g[al.get(0)-1].add(new edge(al.get(0)-1, al.get(1)-1, al.get(2)));
+            g[al.get(1)-1].add(new edge(al.get(1)-1, al.get(0)-1, al.get(2)));
+            g1[al.get(0)-1].add(new edge(al.get(0)-1, al.get(1)-1, al.get(3)));
+        }
+      // boolean vis[][][] = new boolean[n][n][2];
+      
+        int dist1[] = new int[n];
+        int dist2[] = new int [n] ;
+        for(int i= 0 ; i< n ; i++){
+            if(i != a-1){
+                dist1[i] = (int)1e9 ;
+            }
+            if(i!=b-1){
+                 dist2[i] = (int)1e9 ;
+            }
+        }
+        dsk(g,a-1, new boolean[n] ,dist1);
+        dsk(g,b-1, new boolean[n] , dist2);
+        int ans = dist1[b-1];
+        for(int i=0 ;i<n ; i++){
+            for(int j=0 ; j<g1[i].size() ; j++){
+                edge e = g1[i].get(j);
+                ans = Math.min(ans , dist1[e.src] + e.w1 + dist2[e.dest]);
+                ans = Math.min(ans , dist1[e.dest] + e.w1 + dist2[e.src]);
+            }
+            
+        }
+       
+        if(ans == (int)1e9){
+            return -1;
+        }
+        return ans;
+       
+    }
+};
