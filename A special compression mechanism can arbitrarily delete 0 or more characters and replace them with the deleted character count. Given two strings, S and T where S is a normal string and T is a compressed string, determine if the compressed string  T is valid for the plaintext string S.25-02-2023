@@ -1,0 +1,25 @@
+class Solution {
+    static int checkCompressed(String S, String T) {
+        // code here
+        int n=S.length();
+        int m=T.length();
+        int i=m-1;
+        int j=n-1;
+        int prod=1;
+        while(i>=0 && j>=0){
+            if(T.charAt(i)>='A' && T.charAt(i)<='Z'){
+                if(T.charAt(i)!=S.charAt(j)){
+                    return 0;
+                }
+                prod=1;
+                j--;
+            }
+            else{
+                j-=prod*(T.charAt(i)-'0');
+                prod*=10;
+            }
+            i--;
+        }
+        return i==j ? 1 : 0;
+    }
+}
