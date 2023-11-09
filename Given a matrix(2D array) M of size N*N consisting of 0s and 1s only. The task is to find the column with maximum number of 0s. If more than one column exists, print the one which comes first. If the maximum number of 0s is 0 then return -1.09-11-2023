@@ -1,0 +1,23 @@
+class Solution
+{
+    int columnWithMaxZeros(int arr[][], int N)
+    {
+        // code here 
+        int maxZeros = 0, ans = 0;
+        
+        for(int i = 0; i < N; i++) {
+            int zeros = 0;
+            for(int j = 0; j < N; j++) {
+                if(arr[j][i] == 0) {
+                    zeros++;
+                }
+            }
+            if(maxZeros < zeros) {
+                maxZeros = zeros;
+                ans = i;
+            }
+        }
+        
+        return maxZeros == 0 ? -1 : ans;
+    }
+}
