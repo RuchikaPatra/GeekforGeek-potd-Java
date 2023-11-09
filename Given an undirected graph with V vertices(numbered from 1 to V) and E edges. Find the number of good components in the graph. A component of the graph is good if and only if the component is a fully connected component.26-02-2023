@@ -1,0 +1,37 @@
+class Solution {
+    
+    public int findNumberOfGoodComponent(int V, ArrayList<ArrayList<Integer>> adj) {
+        //System.out.println(adj);
+        
+        int ans=0;
+        int vis[]=new int[V+1];
+        
+        for(int i=1;i<V+1;i++){
+            if(vis[i]==0){
+                boolean temp[]=new boolean[1];
+                temp[0]=true;
+                int vcount[]=new int[1];
+                
+                helper(i,adj,vis,temp,adj.get(i).size(),vcount);
+                
+                //System.out.println(adj.get(i).size()+" "+vcount[0]+" "+temp[0]);
+                if(temp[0]==true && vcount[0] == adj.get(i).size()+1)
+                    ans++;
+            }
+        }
+        return ans;
+    }
+    public void helper(int curr, ArrayList<ArrayList<Integer>> adj, int vis[],boolean temp[],int size,int vcount[]){
+        vis[curr]=1;
+        vcount[0]++;
+        if(size != adj.get(curr).size())
+            temp[0]=false;  
+        //System.out.println(curr);
+        for(int neg : adj.get(curr)){
+            if(vis[neg]==0){
+                vis[neg]=1;
+                helper(neg,adj,vis,temp,size,vcount);
+            }
+        }
+    }
+}
