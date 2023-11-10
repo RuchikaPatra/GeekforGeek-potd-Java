@@ -1,0 +1,35 @@
+class Solution {
+    public static Node reverse(Node head, int k) {
+        // code here
+        Node p = null;
+        Node c = head;
+        Node temp = null;
+        
+        while (c != null)
+        {
+            Node n = c.next;
+            c.next = p;
+            
+            p = c;
+            c = n;
+            
+            k--;
+            
+            if (c != null && k == 0)
+            {
+                temp = p;
+                
+                n = c.next;
+                c.next = null;
+
+                p = c;
+                c = n;
+            }
+        }
+        
+        head.next = p;
+        head = temp;
+        
+        return head;
+    }
+}
