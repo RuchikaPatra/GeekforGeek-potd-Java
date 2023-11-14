@@ -1,0 +1,24 @@
+class Solution {
+    public static int maximum_profit(int n, int[][] intervals) {
+        // code here
+        TreeMap<Integer,Integer> dp = new TreeMap<>();
+        Arrays.sort(intervals, (a,b)->(a[1]-b[1]));
+        dp.put(0,0);
+        
+        for (int interval[]: intervals){
+            // include: 
+            // currInterval_profit + maxProfit from prev non-overlapping interval
+        
+            int profit_from_greatestIdx_smaller_than_currIdx = dp.floorEntry(interval[0]).getValue();
+            int currentProfit = interval[2] + profit_from_greatestIdx_smaller_than_currIdx;
+            
+            // prev greatest profit --- similar to dp[i-1]
+            int lastMaxProfit = dp.lastEntry().getValue();
+            
+            if (lastMaxProfit < currentProfit){
+                dp.put(interval[1], currentProfit);
+            }
+        }
+        return dp.lastEntry().getValue();
+    }
+}
