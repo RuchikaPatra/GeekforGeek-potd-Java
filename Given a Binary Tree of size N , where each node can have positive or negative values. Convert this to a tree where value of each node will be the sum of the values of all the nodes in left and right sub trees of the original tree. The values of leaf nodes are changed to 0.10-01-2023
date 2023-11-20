@@ -1,0 +1,15 @@
+class Solution{
+    
+    private static int backtrack(Node node) {
+        if(node == null) {
+            return 0;
+        }
+        
+        int retVal = node.data;
+        node.data = Solution.backtrack(node.left) + Solution.backtrack(node.right);
+        return retVal + node.data;
+    }
+    public void toSumTree(Node root){
+         Solution.backtrack(root);
+    }
+}
