@@ -1,0 +1,21 @@
+class Solution {
+    long minimizeSum(int N, int arr[]) {
+        // code here
+        PriorityQueue<Integer> pq = new PriorityQueue<>(N);
+        long sum = 0;
+        for(int i=0;i<N;++i) {
+            pq.add(arr[i]);
+        }
+        while(!pq.isEmpty()) {
+            int currSmallestEle = pq.poll();
+            if(pq.isEmpty()) {
+                break;
+            }
+            int nextSmallestEle = pq.poll();
+            int currAndNextSum = currSmallestEle + nextSmallestEle;
+            sum = sum + currAndNextSum;
+            pq.add(currAndNextSum);
+        }
+        return sum;
+    }
+}
