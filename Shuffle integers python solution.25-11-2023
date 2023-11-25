@@ -1,0 +1,15 @@
+class Solution:
+    def shuffleArray(self, arr, n):
+        j = n // 2
+        count = 0
+        ls = [0] * n
+        
+        for i in range(n // 2):
+            ls[count] = arr[i]
+            count += 1
+            ls[count] = arr[j]
+            count += 1
+            j += 1
+        
+        for i in range(n):
+            arr[i] = ls[i]
