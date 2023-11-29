@@ -1,0 +1,44 @@
+class Solution{
+    int carpetBox(int L, int B, int C, int D) { 
+        int moves_wo=0;  //Moves count without rotation
+        int moves_w=0; //Moves count with rotation
+        
+        // Storing Length and Breadth for later use
+
+        int L1=L; 
+        int B1=B;
+        
+        while(L>C)
+        {
+            L=L/2;
+            moves_wo++;
+        }
+        while(B>D)
+        {
+            B=B/2;
+            moves_wo++;
+        }
+
+       // Swapping Length and Breadth
+      // Second Case, where L=B and B=L
+        
+        L=B1;
+        B=L1;
+        
+        while(L>C)
+        {
+            L=L/2;
+            moves_w++;
+        }
+        while(B>D)
+        {
+            B=B/2;
+            moves_w++;
+        }
+
+       // Returning Minimum moves from each way
+
+        return(Math.min(moves_wo,moves_w));
+}
+   
+}
