@@ -1,0 +1,22 @@
+class Solution{
+    public int maxWeightCell(int N, int Edge[]){
+       int rah[] = new int[N];
+       for(int i = 0 ; i < N ; i++)
+       {  if(Edge[i] != -1){
+           rah[Edge[i]] += i;
+       }
+       }
+       int max = -1;
+       int ma = -1;
+    for(int i = 0 ; i < N ; i++)
+    {
+        if(rah[i] >= max)
+        {
+            max = rah[i];
+            ma = i;
+        }
+        
+    }
+    return ma;
+    }
+}
