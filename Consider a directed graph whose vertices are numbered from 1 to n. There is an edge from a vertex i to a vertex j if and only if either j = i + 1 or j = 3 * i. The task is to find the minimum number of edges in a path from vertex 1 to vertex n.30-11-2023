@@ -1,0 +1,19 @@
+class Solution{
+    
+    public int minStep(int n)
+    {
+        int ans = findAns(n,0);    
+        return ans;
+    }
+    public static int findAns(int n,int count){
+        if(n==1){
+            return count;
+        }
+        if(n%3==0){
+            count = findAns(n/3,count+1);
+        }else{
+            count = findAns(n-1,count+1);
+        }
+        return count;
+    }
+}
