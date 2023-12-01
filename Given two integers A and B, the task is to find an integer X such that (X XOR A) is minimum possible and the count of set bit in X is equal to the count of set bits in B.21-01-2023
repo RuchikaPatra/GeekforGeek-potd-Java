@@ -1,0 +1,146 @@
+class Solution {
+    public static int minVal(int a, int b) {
+        // code here
+                String binA=bin(a),res=binA;
+        
+                int oneB=count1(b),oneA=count1(a),n=binA.length(),c=-1;
+        
+                // System.out.println(binA);
+        
+                
+        
+                //main code for getting what we want
+        
+                while(oneB!=oneA){
+        
+                    // System.out.println(binA);
+        
+                    if(oneB<oneA){
+        
+                        binA=res;
+        
+                        res="0";
+        
+                        //loop to get least significant 1
+        
+                        for(int i=0;i<n;i++)
+        
+                            if(binA.charAt(i)=='1')c=i;
+        
+                            
+        
+                        for(int i=1;i<n;i++){
+        
+                            if(i!=c)
+        
+                                res+=binA.charAt(i);
+        
+                            else
+        
+                                res+='0';
+        
+                        }
+        
+                        oneA--;
+        
+                    }else if(oneB>oneA){
+        
+                        binA=res;
+        
+                        res="0";
+        
+                        //loop to get least significant 0
+        
+                        for(int i=0;i<n;i++)
+        
+                            if(binA.charAt(i)=='0')c=i;
+        
+                        for(int i=1;i<n;i++){
+        
+                            if(i!=c)
+        
+                                res+=binA.charAt(i);
+        
+                            else
+        
+                                res+='1';
+        
+                        }
+        
+                        oneB--;
+        
+                    }
+        
+                }
+        
+                // System.out.println(binA+"\n"+res);
+        
+                return deci(res);
+        
+        }
+        
+        //meathod to count 1s in given binary
+        
+        static int count1(int a){
+        
+                int res=0;
+        
+                while(a>0){
+        
+                    res+=a%2;
+        
+                    a/=2;
+        
+                }
+        
+                return res;
+        
+        }
+        
+        //meathod to get binary of any number in string
+        
+        static String bin(int a){
+        
+                String res="0";
+        
+                while(a>0){
+        
+                    res+=a%2;
+        
+                    a/=2;
+        
+                }
+        
+                int n=res.length();
+        
+                String in="0";
+        
+                for(int i=n-1;i>0;i--)
+        
+                    in+=res.charAt(i);
+        
+                return in;
+        
+        }
+        
+            
+        
+        //meathod to convert any binary string to decimal integer 
+        
+        static int deci(String a){
+        
+                int n=a.length(),res=0;
+        
+                for(int i=0;i<n;i++){
+        
+                    if(a.charAt(n-(1+i))=='1'){
+        
+                        res+=Math.pow(2,i);
+        
+                    }
+        
+                }
+        
+                return res;
+    }
+}
