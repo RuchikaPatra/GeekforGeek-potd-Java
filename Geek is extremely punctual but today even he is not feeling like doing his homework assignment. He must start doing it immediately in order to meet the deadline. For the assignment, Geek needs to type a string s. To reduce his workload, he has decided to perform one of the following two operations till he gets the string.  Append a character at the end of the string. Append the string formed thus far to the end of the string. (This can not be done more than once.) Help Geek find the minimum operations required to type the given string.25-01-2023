@@ -1,0 +1,50 @@
+class Solution {
+    int minOperation(String s) {
+        // code here
+         int minOperation = Integer.MAX_VALUE;
+
+       for(int i = 0; i < s.length(); i++){
+
+           int currentMinOperation = Integer.MAX_VALUE;
+
+           int len = i+1;
+
+           int count = 0;
+
+           boolean flag = true;
+
+           int j = i+1;
+
+           for(; j < s.length() && count < len; j++,count++){
+
+                if(s.charAt(count) != s.charAt(j)){
+
+                   flag = false;
+
+                   break;
+
+                }
+
+           }
+
+           
+
+           if(count != len){
+
+               currentMinOperation = s.length();
+
+           }else{
+
+               currentMinOperation = len + s.length() - j + 1;
+
+           }
+
+           //System.out.println(count+"  "+currentMinOperation+"  "+j+" "+len);
+
+           minOperation = Math.min(minOperation,currentMinOperation);
+
+       }
+
+       return minOperation;
+    }
+}
