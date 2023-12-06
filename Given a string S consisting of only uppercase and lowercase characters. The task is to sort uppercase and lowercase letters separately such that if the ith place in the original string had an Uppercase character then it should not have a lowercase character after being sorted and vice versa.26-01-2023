@@ -1,0 +1,33 @@
+ArrayList<Character> upper=new ArrayList<Character>();
+        ArrayList<Character> lower=new ArrayList<Character>();
+        for(int i=0;i<str.length();i++){
+            char c=str.charAt(i);
+            if(Character.isLowerCase(c)){
+                lower.add(c);
+            }
+            else if(Character.isUpperCase(c)){
+                upper.add(c);
+            }
+            else{
+                return "wrong input";
+            }
+        }
+        Collections.sort(lower);
+        Collections.sort(upper);
+        int x=0,y=0,pos=0;
+        StringBuffer s=new StringBuffer("");
+        for(int i=0;i<str.length();i++){
+            char d=str.charAt(i);
+            if(Character.isLowerCase(d)){
+                s.insert(pos,lower.get(x));
+                pos++;
+                x++;
+            }
+            else{
+                s.insert(pos,upper.get(y));
+                pos++;
+                y++;
+            }
+        }
+        
+        return s.toString();
