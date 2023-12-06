@@ -1,0 +1,23 @@
+class Solution {
+    int countX(int L, int R, int X) {
+        // code here
+        int c = 0;
+        String s = Integer.toString(X);
+        StringBuilder concat = new StringBuilder();
+        
+        for (int i = L+1; i < R; i++) { 
+            String str = Integer.toString(i);
+            concat.append(str);
+        }
+        
+        String g = concat.toString(); 
+        
+        for (int i = 0; i < g.length(); i++) {
+            char ch = g.charAt(i); 
+            if (ch == s.charAt(0)) { 
+                c++;
+            }
+        }
+        return c;
+    }
+};
