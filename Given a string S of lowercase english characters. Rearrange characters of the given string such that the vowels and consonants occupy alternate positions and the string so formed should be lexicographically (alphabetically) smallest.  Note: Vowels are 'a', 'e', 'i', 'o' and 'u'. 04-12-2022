@@ -1,0 +1,77 @@
+class Solution{
+    public String rearrange(String S, int N){
+         TreeMap<Character,Integer> map1=new TreeMap<>();
+        TreeMap<Character,Integer> map2=new TreeMap<>();
+     
+        for(char ch:S.toCharArray())
+        {
+            if(("aeiou").indexOf(ch)!=-1)
+            {
+                map1.put(ch,map1.getOrDefault(ch,0)+1);
+               
+            }
+            else
+            {
+                map2.put(ch,map2.getOrDefault(ch,0)+1);
+                
+            }
+        }
+       StringBuilder sb1=new StringBuilder("");
+       StringBuilder sb2=new StringBuilder("");
+       for(char ch:map1.keySet())
+       {
+           int freq=map1.get(ch);
+           char let=ch;
+           while(freq>0)
+           {
+               sb1.append(let);
+               freq--;
+           }
+       }
+       String v=sb1.toString();
+       for(char ch:map2.keySet())
+       {
+           int freq=map2.get(ch);
+           char let=ch;
+           while(freq>0)
+           {
+               sb2.append(let);
+               freq--;
+           }
+       }
+       String c=sb2.toString();
+       StringBuilder sb=new StringBuilder("");
+       String s1="",s2="";
+       if(Math.abs(v.length()-c.length())>1)
+       {
+           return "-1";
+       }
+       if(v.length()==c.length() && v.compareTo(c)<1 || v.length()>c.length())
+       {
+           s1=v;
+          s2=c;
+       }
+       else if(v.length()==c.length() && v.compareTo(c)>1 || v.length()<c.length())
+       {
+          s1=c;
+         s2=v;
+       }
+       int a=0,b=0;
+       for(int i=0;i<N;i++)
+       {
+           if(i%2==0 && a<s1.length())
+           {
+               sb.append(s1.charAt(a));
+               a++;
+           }
+           else
+           {
+               sb.append(s2.charAt(b));
+               b++;
+           }
+       }
+       return sb.toString();
+
+
+    }
+}
