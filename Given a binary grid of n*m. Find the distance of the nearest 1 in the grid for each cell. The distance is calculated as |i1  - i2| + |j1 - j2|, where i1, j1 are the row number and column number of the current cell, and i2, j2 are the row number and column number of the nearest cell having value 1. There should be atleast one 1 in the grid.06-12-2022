@@ -1,0 +1,54 @@
+class Solution
+{
+    //Function to find distance of nearest 1 in the grid for each cell.
+    public int[][] nearest(int[][] grid)
+    {
+        // Code here
+        int rows = grid.length;
+        int cols = grid[0].length;
+        Queue<int[]> q = new ArrayDeque<>();
+        int[][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        boolean[][] visited = new boolean[rows][cols];
+        int[][] oneDistance = new int[rows][cols];
+        
+        
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(visited[i], false);
+        }
+        
+        // we can check that how much farther you are away from a one
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] == 1) {
+                    int[] cordsDist = {i, j, 0};
+                    visited[i][j] = true;
+                    q.offer(cordsDist);
+                }
+            }
+        }
+        
+        
+        while (!q.isEmpty()) {
+            int[] cordsDist = q.poll();
+            int i = cordsDist[0];
+            int j = cordsDist[1];
+            int dist = cordsDist[2];
+            
+            oneDistance[i][j] = dist;
+            
+            for (int[] dir: directions) {
+                int ii = i + dir[0];
+                int jj = j + dir[1];
+                
+                boolean out = ii < 0 || ii >= rows || jj < 0 || jj >= cols;
+                if (out || visited[ii][jj]) continue;
+                
+                int[] nbr = {ii, jj, dist + 1};
+                q.offer(nbr);
+                visited[ii][jj] = true;
+            }
+        }
+        
+        return oneDistance;
+    }
+}
