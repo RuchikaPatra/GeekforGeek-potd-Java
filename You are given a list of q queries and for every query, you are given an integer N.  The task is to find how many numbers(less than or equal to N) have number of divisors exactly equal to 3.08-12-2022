@@ -1,0 +1,30 @@
+class Solution{
+    static ArrayList<Integer> threeDivisors(ArrayList<Long> query, int q){
+        // code here
+         ArrayList<Integer> ans = new ArrayList<>();
+        // sqrt.size is the q[i]th ans
+        ArrayList<Long> sqrt = new ArrayList<>();
+        for(long lim:query){
+            sqrt.clear();
+            int a=2, check; long b;
+            // (no or b) <= lim can be the ans if (no or b) is a squre-root of a
+            while((long)a*a <= lim){
+                check = 0;
+                b = (long) a*a;
+                for(long u:sqrt){
+                    if(u > a) break;
+                    // if any number u in sqrt and lessthen a -
+                        // - completely devide b then b is not the ans hense -1
+                    if(b%u == 0){
+                        check = -1;
+                        break;
+                    }
+                }
+                if(check == 0) sqrt.add(b);
+                a++;
+            }
+            ans.add(sqrt.size());
+        }
+        return ans;
+    }
+}
