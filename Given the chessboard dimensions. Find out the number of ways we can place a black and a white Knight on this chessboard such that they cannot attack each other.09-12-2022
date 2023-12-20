@@ -1,0 +1,44 @@
+class BlackAndWhite
+{
+    //Function to find out the number of ways we can place a black and a 
+    //white Knight on this chessboard such that they cannot attack each other.
+    static boolean isSafe(int r,int c,int n,int m,int[] arr,int[] dx,int[] dy){
+        if(r<0||r>=n||c<0||c>=m){
+            return false;
+        }
+
+        return true;
+    }
+    static void chkCnt(int r,int c,int n,int m,int[] arr,int[] dx,int[] dy){
+        for(int i=0;i<dx.length;i++){
+            int x=r+dx[i];
+            int y=c+dy[i];
+            if(isSafe(x,y,n,m,arr,dx,dy)){
+                arr[0]++;
+            }
+        }
+    }
+    static long numOfWays(int N, int M)
+    {
+        // add your code here
+        int[] arr={0};
+        int[] dx={1,1,-1,-1,2,2,-2,-2};
+        int[] dy={2,-2,2,-2,1,-1,1,-1};
+        int sub=(N*M)-1;
+        long ans=0;
+        long mod=(long)(Math.pow(10,9)+7);
+        for(int i=0;i<N;i++){
+    
+            for(int j=0;j<M;j++){
+                arr[0]=0;
+               // System.out.println("before"+ans+" "+sub+" "+arr[0]);
+                if(isSafe(i,j,N,M,arr,dx,dy)){
+                    chkCnt(i,j,N,M,arr,dx,dy);
+                    ans+=Math.abs(sub-arr[0]);
+                    //System.out.println(ans+" "+sub+" "+arr[0]);
+                }
+            }
+        }
+        return (ans%mod);
+    }
+}
