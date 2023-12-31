@@ -1,0 +1,68 @@
+class Solution {
+
+    int minimumCost(int[][] flights, int n, int k) {
+        // Your code here
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+        
+        for(int i=0;i<=n;i++) {
+            adj.add(new ArrayList<>());
+        }
+        
+        for(int i=0;i<flights.length;i++) {
+            int u = flights[i][0];
+            int v = flights[i][1];
+            int w = flights[i][2];
+            
+            ArrayList<Integer> temp = new ArrayList<>();
+            temp.add(v);
+            temp.add(w);
+            
+            adj.get(u).add(temp);
+        }
+        
+        int[] dist = new int[n+1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[0] = 0;
+        dist[k] = 0;
+        
+        boolean[] isFin = new boolean[n+1];
+        isFin[0] = true;
+        
+        for(int j=1;j<n;j++) {
+            int u = -1;
+            for(int i=1;i<=n;i++) {
+                if(isFin[i] == false && (u == -1 || dist[u] > dist[i])) {
+                    u = i;
+                }
+            }
+            
+            if(dist[u] == Integer.MAX_VALUE) {
+                continue;
+            }
+            
+            isFin[u] = true;
+            
+            for(int i=0;i<adj.get(u).size();i++) {
+                int v = adj.get(u).get(i).get(0);
+                int w = adj.get(u).get(i).get(1);
+                
+                if(isFin[v] == false && dist[v] > dist[u] + w) {
+                    dist[v] = dist[u] + w;
+                }
+            }
+        }
+        
+        // System.out.println(Arrays.toString(dist));
+        
+        int money = 0;
+        for(int i=1;i<=n;i++) {
+            if(dist[i] == Integer.MAX_VALUE) {
+                return -1;
+            }
+            
+            money = Math.max(money, dist[i]);
+        }
+        
+        return money;
+    }
+}
