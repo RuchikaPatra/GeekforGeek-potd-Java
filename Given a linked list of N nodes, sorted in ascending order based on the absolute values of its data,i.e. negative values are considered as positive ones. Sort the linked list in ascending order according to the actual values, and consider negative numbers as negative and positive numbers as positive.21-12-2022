@@ -1,0 +1,25 @@
+class Solution
+{
+	Node sortList(Node head) {
+		// Your code here
+		Node temp=head;
+        ArrayList<Integer> al=new ArrayList<>();
+         
+         while(temp!=null){
+             al.add(temp.data);
+             temp=temp.next;
+         }
+         
+         
+         
+         Collections.sort(al);
+           temp=head;
+            for(int value:al)
+             {
+                 temp.data=value;
+                 temp=temp.next;
+             }
+        
+             return head;
+	}
+}
